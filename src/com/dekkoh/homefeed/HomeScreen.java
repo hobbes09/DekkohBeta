@@ -30,7 +30,7 @@ public class HomeScreen extends FragmentActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//customizeActionBar();
+		customizeActionBar();
 		setContentView(R.layout.activity_home);
 		
 	}
