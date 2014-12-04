@@ -1,7 +1,5 @@
 package com.dekkoh.homefeed;
 
-
-import com.dekkoh.actionbarmenu.ActionbarMenu;
 import com.example.dekkohbeta.R;
 
 import android.app.ActionBar;
@@ -17,10 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -39,13 +34,9 @@ public class HomeScreen extends FragmentActivity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);	
-		customizeActionBar();
-
-		setContentView(R.layout.activity_home);
-		
-		//ActionbarMenu.setActivityInformation(getApplicationContext(), getWindow(), getActionBar());
-		//ActionbarMenu.getActionBarMenuInstance().customizeActionBar();
-				initialize();
+		customizeActionBar();	// MUST BE PLACED BEFORE setContentView()
+		setContentView(R.layout.activity_home);	
+		initialize();
 	}
 	
 	private void initialize() {
@@ -58,12 +49,12 @@ public class HomeScreen extends FragmentActivity implements OnClickListener{
 		ibPost.setOnClickListener(this);
 	}
 
-	private void customizeActionBar() {
+	private void customizeActionBar() {	
 		// TODO Auto-generated method stub
-		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+		//getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
 		ActionBar actionBar = getActionBar();
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000ff")));
-		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000ff")));
+		//actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000ff")));
+		//actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000ff")));
 		
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
@@ -75,7 +66,7 @@ public class HomeScreen extends FragmentActivity implements OnClickListener{
 		actionBar.setDisplayShowCustomEnabled(true);
 
 	}
-
+	
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
@@ -140,7 +131,7 @@ public class HomeScreen extends FragmentActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		switch(view.getId()){
 			case R.id.ibMenu:
-							//ActionbarMenu.getActionBarMenuInstance().getPopupWindowMenu().showAsDropDown(view);
+							Toast.makeText(getApplicationContext(), "Menu Clicked", Toast.LENGTH_SHORT).show();
 							break;
 							
 			case R.id.ibMap:
