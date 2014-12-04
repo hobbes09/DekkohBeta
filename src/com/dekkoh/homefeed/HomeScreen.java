@@ -1,6 +1,7 @@
 package com.dekkoh.homefeed;
 
 
+import com.dekkoh.actionbarmenu.ActionbarMenu;
 import com.example.dekkohbeta.R;
 
 import android.app.ActionBar;
@@ -9,32 +10,54 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class HomeScreen extends FragmentActivity{
+public class HomeScreen extends FragmentActivity implements OnClickListener{
 	
 	// Coordinates for swipe action detector
 	private float x1, x2;
 	private float y1, y2;
 	private static int currentIndex = 0;  //store and keep updating in shared preference
+	
+	ImageButton ibMenu;
+	ImageButton ibPost;
+	ImageButton ibMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);	
 		customizeActionBar();
+
 		setContentView(R.layout.activity_home);
 		
+		//ActionbarMenu.setActivityInformation(getApplicationContext(), getWindow(), getActionBar());
+		//ActionbarMenu.getActionBarMenuInstance().customizeActionBar();
+				initialize();
 	}
 	
+	private void initialize() {
+		// TODO Auto-generated method stub
+		ibMenu = (ImageButton)findViewById(R.id.ibMenu);
+		ibMap = (ImageButton)findViewById(R.id.ibMap);
+		ibPost = (ImageButton)findViewById(R.id.ibPost);
+		ibMenu.setOnClickListener(this);
+		ibMap.setOnClickListener(this);
+		ibPost.setOnClickListener(this);
+	}
+
 	private void customizeActionBar() {
 		// TODO Auto-generated method stub
 		getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
@@ -103,7 +126,7 @@ public class HomeScreen extends FragmentActivity{
 		            if ((y1 > y2) && (Math.abs(x1-x2) < Math.abs(y1-y2))){
 		            	Toast.makeText(this, "Down to UP Swap Performed", Toast.LENGTH_SHORT).show();
 		            	currentIndex++;
-		            	animation(currentIndex);
+		            	FragmentTransition.getFragmentTransitionInstance().getQuestion(currentIndex, getSupportFragmentManager());
 		            }
 		            break;
 		       }
@@ -112,20 +135,24 @@ public class HomeScreen extends FragmentActivity{
     	return false;
     }
 
-	private void animation(int currentIndex) {
+	@Override
+	public void onClick(View view) {
 		// TODO Auto-generated method stub
-		QuestionFragment questionFragment = new QuestionFragment();
-		Bundle questionFragArgs = new Bundle();
-		questionFragArgs.putString("LOCATION", "Location1");
-		questionFragArgs.putString("USERNAME", "Username1");
-		questionFragArgs.putString("QUESTION", "Question1 ?? + currentIndex = " + currentIndex);
-		questionFragment.setArguments(questionFragArgs);
+		switch(view.getId()){
+			case R.id.ibMenu:
+							//ActionbarMenu.getActionBarMenuInstance().getPopupWindowMenu().showAsDropDown(view);
+							break;
+							
+			case R.id.ibMap:
+							Toast.makeText(getApplicationContext(), "Map Clicked", Toast.LENGTH_SHORT).show();
+							break;
+							
+			case R.id.ibPost:
+							Toast.makeText(getApplicationContext(), "Post Clicked", Toast.LENGTH_SHORT).show();
+							break;
+		}
 		
-		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-		transaction.setCustomAnimations(R.animator.frag_slide_in_from_bottom, 0);
-	    transaction.replace(R.id.contentHomeActivity, questionFragment);
-	    transaction.commit();
-	
 	}
+    
 	
 }
