@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.view.MotionEvent;
 
 public class QuestionFragment extends Fragment{
 	
@@ -17,7 +19,9 @@ public class QuestionFragment extends Fragment{
 	private TextView tvQuestion;
 	private ImageView ivHomeImage;
 	
-	QuestionFragment(){		
+	private static int currentIndex = 0;  //store and keep updating in shared preference
+	
+	QuestionFragment(){				
 	}
 
 	@Override
@@ -25,19 +29,30 @@ public class QuestionFragment extends Fragment{
 			Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.question_fragment, null);
 		
+		root.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    Toast.makeText(getActivity(), "QuestionFragment touch detected", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+		});
+
+		
 		initialize(root);
-		setValues();
+		//setValues();
 		
         return root;		
 	}
 
-	private void setValues() {
+/*	private void setValues() {
 		tvLocation.setText(getArguments().getString("LOCATION"));
 		tvUsername.setText(getArguments().getString("USERNAME"));
 		tvQuestion.setText(getArguments().getString("QUESTION"));
 		//ivHomeImage.setImageBitmap(getArguments().get);
 		//root.setBackgroundColor(getArguments().getInt(COLOR));
-	}
+	}*/
 
 	private void initialize(View root) {
 		tvLocation = (TextView)root.findViewById(R.id.tvLocation);

@@ -4,6 +4,16 @@
     android:layout_height="40dp"
     android:background="#000000ff">
     
+    <TextView 
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp" 
+        android:text="Dekkoh"/>"
+    
+    <!--  
     <ImageButton
         android:id="@+id/ibMenu"
         android:layout_width="wrap_content"
@@ -13,7 +23,7 @@
         android:layout_marginLeft="8dp"
         android:background="@null"
         android:src="@drawable/ic_launcher"/>"
-    
+    -->
     <ImageButton
         android:id="@+id/ibPost"
         android:layout_width="wrap_content"
@@ -22,7 +32,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:background="@null"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_photos" />
     
     <ImageButton
         android:id="@+id/ibMap"
@@ -32,6 +42,6 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="60dp"
         android:background="@null"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_photos" />
     
 </RelativeLayout>
